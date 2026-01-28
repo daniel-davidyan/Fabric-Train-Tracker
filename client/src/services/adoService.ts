@@ -12,6 +12,10 @@ import { buildVsrmApiBaseUrl } from './urlParser';
 const API_VERSION = '7.1';
 const API_VERSION_PREVIEW = '7.1-preview.1';
 
+// Constants
+const POWERBI_CLIENTS_REPO_GUID = '979df5a4-0e65-463c-b88e-6cd5ca2e5df3';
+const POWERBI_CLIENTS_REPO_NAME = 'PowerBIClients';
+
 // ADO API Response types
 interface ADOPRResponse {
   pullRequestId: number;
@@ -217,8 +221,13 @@ export class ADOService {
       ? branchName 
       : `refs/heads/${branchName}`;
     
-    // Use repository GUID if provided, otherwise use repository name (which might fail)
-    const repoId = repositoryGuid || this.parsedUrl.repository;
+    // Use repository GUID if provided, otherwise check for known repos requiring GUID
+    let repoId = repositoryGuid || this.parsedUrl.repository;
+    
+    // Hard-fix for PowerBIClients: Always use GUID
+    if (repoId.toLowerCase() === POWERBI_CLIENTS_REPO_NAME.toLowerCase()) {
+      repoId = POWERBI_CLIENTS_REPO_GUID;
+    }
     
     const url = `${this.baseUrl}/_apis/build/builds?branchName=${encodeURIComponent(normalizedBranch)}&repositoryId=${encodeURIComponent(repoId)}&repositoryType=TfsGit&$top=${top}&queryOrder=startTimeDescending&api-version=${API_VERSION}`;
     
@@ -311,8 +320,14 @@ export class ADOService {
    * If the merge base of A and B equals A, then A is an ancestor of B
    */
   async isCommitAncestor(commitA: string, commitB: string): Promise<boolean> {
+    // Resolve repo ID (use GUID for PowerBIClients)
+    let repoId = this.parsedUrl.repository;
+    if (repoId.toLowerCase() === POWERBI_CLIENTS_REPO_NAME.toLowerCase()) {
+      repoId = POWERBI_CLIENTS_REPO_GUID;
+    }
+
     // Correct URL format: commits/{commitId}/mergebases?otherCommitId=xxx
-    const url = `${this.baseUrl}/_apis/git/repositories/${encodeURIComponent(this.parsedUrl.repository)}/commits/${commitA}/mergebases?otherCommitId=${commitB}&api-version=${API_VERSION}`;
+    const url = `${this.baseUrl}/_apis/git/repositories/${encodeURIComponent(repoId)}/commits/${commitA}/mergebases?otherCommitId=${commitB}&api-version=${API_VERSION}`;
     
     console.log(`      📡 Calling merge bases API: ${url}`);
     
@@ -633,9 +648,15 @@ export class ADOService {
   ): Promise<Build[]> {
     console.log(`🔍 Looking for builds containing commit ${mergeCommitId.substring(0, 7)}`);
     
+    // Ensure we use GUID if provided string is still the name for PowerBIClients
+    let repoId = repositoryGuid;
+    if (repoId.toLowerCase() === POWERBI_CLIENTS_REPO_NAME.toLowerCase()) {
+      repoId = POWERBI_CLIENTS_REPO_GUID;
+    }
+    
     // Get ALL recent builds on repository (not just CI builds on target branch)
     // This includes Release pipeline builds
-    const url = `${this.baseUrl}/_apis/build/builds?repositoryId=${encodeURIComponent(repositoryGuid)}&repositoryType=TfsGit&minTime=${new Date(closedDate).toISOString()}&$top=200&queryOrder=startTimeDescending&api-version=${API_VERSION}`;
+    const url = `${this.baseUrl}/_apis/build/builds?repositoryId=${encodeURIComponent(repoId)}&repositoryType=TfsGit&minTime=${new Date(closedDate).toISOString()}&$top=200&queryOrder=startTimeDescending&api-version=${API_VERSION}`;
     
     let builds: Build[] = [];
     try {
