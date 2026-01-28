@@ -270,11 +270,19 @@ export class ADOService {
   async getEnvironmentDeploymentRecords(environmentId: number, top: number = 50, projectName?: string): Promise<ADOEnvironmentDeploymentRecord[]> {
     // Construct base URL based on project override or default parsed project
     let baseUrl = this.baseUrl;
-    if (projectName) {
-      baseUrl = `https://dev.azure.com/${this.parsedUrl.organization}/${encodeURIComponent(projectName)}`;
+    
+    // Explicit Project ID mapping for robustness
+    if (projectName === 'Power BI') {
+        baseUrl = `https://dev.azure.com/${this.parsedUrl.organization}/95357ac2-28a1-4a93-9a31-d2fb5a35e6ea`;
+    } else if (projectName === 'PowerBIClients') {
+        baseUrl = `https://dev.azure.com/${this.parsedUrl.organization}/a7b12953-6e3b-4d8f-af39-20332f892c65`;
+    } else if (projectName) {
+        baseUrl = `https://dev.azure.com/${this.parsedUrl.organization}/${encodeURIComponent(projectName)}`;
     }
 
     const url = `${baseUrl}/_apis/distributedtask/environments/${environmentId}/environmentdeploymentrecords?top=${top}&api-version=${API_VERSION_PREVIEW}`;
+    
+    console.log(`    📡 Fetching records from: ${projectName || 'Current'} (Env: ${environmentId})`);
     
     try {
       const response = await this.fetchAdo<ADOEnvironmentDeploymentRecordsResponse>(url);
@@ -454,27 +462,29 @@ export class ADOService {
 
     const deployments: DeploymentStatus[] = [];
 
-    // Detect if this is a FE (PowerBIClients) or BE (Power BI) PR
-    const isFE = this.parsedUrl.repository.toLowerCase() === POWERBI_CLIENTS_REPO_NAME.toLowerCase();
-    const isBE = this.parsedUrl.repository.toLowerCase() === 'power bi' || 
-                 this.parsedUrl.repository.toLowerCase() === 'powerbi' ||
-                 this.parsedUrl.repository.toLowerCase() === 'power%20bi';
+    // DETECT REPOSITORY TYPE & SET MODE
+    const repoName = this.parsedUrl.repository.toLowerCase();
+    const isFE = repoName === POWERBI_CLIENTS_REPO_NAME.toLowerCase();
+    const isBE = repoName === 'power bi' || repoName === 'powerbi' || repoName === 'power%20bi';
 
-    console.log(`  Repo Logic: ${this.parsedUrl.repository} -> FE? ${isFE}, BE? ${isBE}`);
+    console.log(`  🔍 Repo Detection: "${this.parsedUrl.repository}" -> FE: ${isFE}, BE: ${isBE}`);
 
-    // Filter relevant environments
     let relevantEnvs = ALL_TRACKED_ENVIRONMENTS;
     if (isFE) {
+        // ONLY check FE environments for FE repos
         relevantEnvs = ALL_TRACKED_ENVIRONMENTS.filter(e => e.product === 'FE');
     } else if (isBE) {
+        // ONLY check BE environments for BE repos
         relevantEnvs = ALL_TRACKED_ENVIRONMENTS.filter(e => e.product === 'BE');
     } else {
-        // Default / Fallback: Try PLG/RDL/VIZ as before or just all?
-        // Let's stick to old behavior if not clearly FE/BE, or default to BE (Monolith) if unknown
-        console.log('  ⚠️ Unrecognized repo for PLG logic. Checking standard PLG/RDL sets.');
+        // Other repos (RDL, Viz) default to specific products or all
+        console.log('  ⚠️ Unrecognized repo for strict FE/BE logic. Defaulting to product matching.');
     }
 
-    console.log(`  Checking ${relevantEnvs.length} environments...`);
+    // Sort by order
+    relevantEnvs = relevantEnvs.sort((a,b) => a.order - b.order);
+    
+    console.log(`  🎯 Target Range: ${relevantEnvs.map(e => e.displayName).join(', ')}`);
 
     // Check each environment INDEPENDENTLY
     // Each ring has its own pipeline and may deploy from different branches
