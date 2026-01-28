@@ -488,11 +488,17 @@ export class ADOService {
 
           // Try to get as Build first
           const build = await this.getBuildById(ownerId);
+          let buildRepoName: string | undefined;
           
           if (build && build.sourceVersion) {
             sourceVersion = build.sourceVersion;
             buildStartTime = new Date(build.startTime);
             webUrl = build._links.web.href || webUrl;
+            // Trying to extract repo name from build definition or repository object if available
+            // Note: ADO Build object often has repository details
+            if ((build as any).repository) {
+                buildRepoName = (build as any).repository.name;
+            }
           } else {
              // Fallback: Try to get as Release
              console.log(`    Build ${ownerId} not found or validity check failed. Trying as Release...`);
@@ -533,19 +539,29 @@ export class ADOService {
              console.log(`    ⚠️ Could not resolve source version for deployment ${ownerId}. Skipping.`);
              continue; 
           }
+          const prRepo = this.parsedUrl.repository.toLowerCase();
+          const buildRepo = buildRepoName ? buildRepoName.toLowerCase() : '';
           
-          successfulChecks++;
-          
+          // Determine if we can use strictly ancestry check (Same Repo) or need fuzzy time check (Cross Repo/Unknown)
+          const isSameRepo = buildRepo && (buildRepo === prRepo || buildRepo.includes(prRepo) || prRepo.includes(buildRepo));
           let isMatch = false;
 
-          if (env.product === 'PLG') {
+          if (env.product === 'PLG' && isSameRepo) {
             // PLG: Same-Repo Ancestry Check (Strict)
+            // Only use this if we are SURE the build comes from the same repo.
+            
+            console.log(`    Checking commit ancestry (Same Repo: ${prRepo})...`);
             isMatch = await this.isCommitAncestor(mergeCommitId, sourceVersion);
           } else {
-            // RDL/VIZ: Cross-Repo Time-Based Heuristic
+            // Cross-Repo or Unknown: Time-Based Heuristic
+            // This handles PowerBIClients -> Power BI (monolith) flow
+            // If Deployment Build Time > PR Merge Time + Buffer, it likely contains the PR
             if (buildStartTime) {
               const prMergeTime = new Date(closedDate);
+              // Add small buffer (e.g. 15 mins) to avoid race conditions where build started before PR merge finished but picked it up
+              // actually, if build started AFTER merge, it definitely has it.
               isMatch = buildStartTime > prMergeTime;
+              console.log(`    Checking timestamps (Cross-Repo/Fallback): Build ${buildStartTime.toLocaleString()} > PR Merge ${prMergeTime.toLocaleString()}? ${isMatch}`);
             }
           }
 
