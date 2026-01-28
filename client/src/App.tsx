@@ -65,8 +65,8 @@ function App() {
     <div className="app">
       <header className="header">
         <h1>
-          <span className="train-icon">🚂</span>
           FE Train Tracker
+          <span className="train-icon">🚂</span>
         </h1>
         <p className="subtitle">
           Track your PR inclusion status across environments

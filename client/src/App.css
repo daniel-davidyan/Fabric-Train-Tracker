@@ -30,6 +30,8 @@
 
 .train-icon {
   font-size: 2.5rem;
+  display: inline-block;
+  transform: scaleX(-1);
 }
 
 .subtitle {
@@ -465,7 +467,7 @@
 .train-moving {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scaleX(-1);
   font-size: 2rem;
   animation: trainMove 2s linear infinite;
 }
