@@ -1,243 +1,231 @@
-import { useState, useCallback } from 'react'
-import PRInput from './components/PRInput'
-import PRInfo from './components/PRInfo'
-import DeploymentPipeline from './components/DeploymentPipeline'
-import { LogStream, LogEntry } from './components/LogStream'
-import { PRStatusResponse } from './types'
-import { parsePRUrl } from './services/urlParser'
-import { createADOService } from './services/adoService'
+import { useState } from 'react';
+import { checkPRDeploymentStatus } from './services/adoService';
+import { PRDeploymentResult, InclusionStatus, FE_ENVIRONMENTS, EnvironmentDeploymentStatus } from './types';
+import './App.css';
 
 function App() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [prStatus, setPrStatus] = useState<PRStatusResponse | null>(null)
-  const [logs, setLogs] = useState<LogEntry[]>([])
+  const [prUrl, setPrUrl] = useState('');
+  const [pat, setPat] = useState(() => {
+    return localStorage.getItem('ado_pat') || '';
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<PRDeploymentResult | null>(null);
 
-  // Helper to add log entries
-  const addLog = useCallback((type: LogEntry['type'], message: string, details?: string) => {
-    setLogs(prev => [...prev, {
-      id: Date.now() + Math.random(),
-      timestamp: new Date(),
-      type,
-      message,
-      details,
-    }])
-  }, [])
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!prUrl.trim() || !pat.trim()) return;
 
-  const handleSubmit = async (prUrl: string, pat: string) => {
-    setLoading(true)
-    setError(null)
-    setPrStatus(null)
-    setLogs([])
+    setLoading(true);
+    setError(null);
+    setResult(null);
+
+    // Save PAT for convenience
+    localStorage.setItem('ado_pat', pat);
 
     try {
-      // Parse the PR URL
-      addLog('info', 'Parsing PR URL...', prUrl)
-      const parsedUrl = parsePRUrl(prUrl)
-      addLog('success', 'URL parsed successfully', `PR #${parsedUrl.pullRequestId}`)
-
-      // Create ADO service instance
-      addLog('info', 'Connecting to Azure DevOps...')
-      const adoService = createADOService(pat, parsedUrl)
-
-      // Fetch PR details
-      addLog('check', 'Fetching PR details...', `${parsedUrl.organization}/${parsedUrl.project}`)
-      const prInfo = await adoService.getPullRequest()
-      addLog('success', `PR: ${prInfo.title}`)
-      addLog('info', `Status: ${prInfo.status}`)
-      
-      if (prInfo.closedDate) {
-        addLog('info', `Merged: ${new Date(prInfo.closedDate).toLocaleString()}`)
-      }
-      
-      if (prInfo.mergeCommitId) {
-        addLog('info', `Merge commit: ${prInfo.mergeCommitId.substring(0, 7)}`)
-      }
-
-      // Fetch commits
-      addLog('check', 'Fetching PR commits...')
-      const commits = await adoService.getPRCommits()
-      const commitIds = commits.map(c => c.commitId)
-      addLog('success', `Found ${commits.length} commits`)
-      commits.slice(0, 3).forEach(c => {
-        addLog('info', `  ${c.commitId.substring(0, 7)}`, c.comment?.substring(0, 50))
-      })
-
-      // Fetch builds for the source branch
-      addLog('check', `Fetching builds for branch...`, prInfo.sourceRefName.replace('refs/heads/', ''))
-      const builds = await adoService.getBuildsForBranch(prInfo.sourceRefName)
-      addLog('success', `Found ${builds.length} related builds`)
-
-      // Fetch deployments
-      addLog('check', 'Starting deployment verification...')
-      addLog('info', '🚂 Checking PLG environments (train-based deployment)...')
-      
-      const deployments = await adoService.getAllDeployments(
-        prInfo.sourceRefName,
-        prInfo.title,
-        commitIds,
-        prInfo.creationDate,
-        prInfo.closedDate,
-        prInfo.mergeCommitId,
-        prInfo.targetRefName,
-        prInfo.repository.id
-      )
-
-      // Log deployment results
-      deployments.forEach(dep => {
-        if (dep.status === 'deployed') {
-          addLog('success', `✅ ${dep.environment}: DEPLOYED`, dep.timestamp ? new Date(dep.timestamp).toLocaleString() : '')
-        } else if (dep.status === 'waitingForTrain') {
-          addLog('warning', `⏳ ${dep.environment}: Waiting for train`)
-        } else if (dep.status === 'notDeployed') {
-          addLog('info', `⬜ ${dep.environment}: Not deployed`)
-        } else {
-          addLog('info', `❓ ${dep.environment}: ${dep.status}`)
-        }
-      })
-
-      // Build response
-      const response: PRStatusResponse = {
-        prInfo,
-        commits,
-        builds,
-        deployments,
-        parsedUrl,
-      }
-
-      setPrStatus(response)
-      addLog('success', '🏁 Deployment check complete!')
-
+      const data = await checkPRDeploymentStatus(prUrl.trim(), pat.trim());
+      setResult(data);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred'
-      addLog('error', 'Error occurred', errorMessage)
-      setError(errorMessage)
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+
+  const getStatusColor = (status: InclusionStatus): string => {
+    switch (status) {
+      case 'included': return 'status-included';
+      case 'not-included': return 'status-not-included';
+      case 'in-progress': return 'status-in-progress';
+      case 'no-builds': return 'status-no-builds';
+      case 'error': return 'status-error';
+      default: return '';
+    }
+  };
+
+  const getStatusIcon = (status: InclusionStatus): string => {
+    switch (status) {
+      case 'included': return '✓';
+      case 'not-included': return '○';
+      case 'in-progress': return '◐';
+      case 'no-builds': return '?';
+      case 'error': return '✗';
+      default: return '';
+    }
+  };
+
+  // Get environment status from result or return null for pending state
+  const getEnvironmentData = (envId: number): EnvironmentDeploymentStatus | null => {
+    if (!result || !result.supportedRepo || !result.prInfo.mergeCommitId) return null;
+    return result.environments.find(e => e.environment.id === envId) || null;
+  };
 
   return (
-    <div className="min-h-screen bg-slate-900 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-6">
-          <h1 className="text-4xl font-bold text-white mb-2 flex items-center justify-center gap-3">
-            <span className="text-4xl">🚂</span>
-            Train Tracker
-          </h1>
-          <p className="text-slate-400 text-lg">
-            Track your PR deployment status across Fabric environments
-          </p>
-        </div>
+    <div className="app">
+      <header className="header">
+        <h1>
+          <span className="train-icon">🚂</span>
+          FE Train Tracker
+        </h1>
+        <p className="subtitle">
+          Track your PR inclusion status across environments
+        </p>
+      </header>
 
-        {/* Input Form */}
-        <div className="mb-6">
-          <PRInput onSubmit={handleSubmit} loading={loading} />
-        </div>
-
-        {/* Error Display */}
-        {error && (
-          <div className="bg-red-900/50 border border-red-500 text-red-200 px-6 py-4 rounded-lg mb-6">
-            <div className="flex items-center gap-2">
-              <span className="text-xl">⚠️</span>
-              <span className="font-semibold">Error:</span>
-              <span>{error}</span>
-            </div>
-          </div>
-        )}
-
-        {/* Log Stream - Show when loading or has logs */}
-        {(loading || logs.length > 0) && (
-          <div className="mb-6">
-            <LogStream logs={logs} isRunning={loading} />
-          </div>
-        )}
-
-        {/* Results */}
-        {prStatus && !loading && (
-          <div className="space-y-6">
-            {/* PR Info Card */}
-            <PRInfo prStatus={prStatus} />
-
-            {/* Deployment Pipeline */}
-            <DeploymentPipeline 
-              deployments={prStatus.deployments} 
-              prMergeDate={prStatus.prInfo.closedDate}
+      <div className="main-container">
+        <form onSubmit={handleSubmit} className="input-form">
+          <div className="input-group">
+            <label htmlFor="prUrl">PR URL</label>
+            <input
+              id="prUrl"
+              type="text"
+              value={prUrl}
+              onChange={(e) => setPrUrl(e.target.value)}
+              placeholder="https://dev.azure.com/powerbi/PowerBIClients/_git/PowerBIClients/pullrequest/123456"
+              disabled={loading}
             />
+          </div>
+          <div className="input-group">
+            <label htmlFor="pat">PAT Token</label>
+            <input
+              id="pat"
+              type="password"
+              value={pat}
+              onChange={(e) => setPat(e.target.value)}
+              placeholder="Your Azure DevOps Personal Access Token"
+              disabled={loading}
+            />
+          </div>
+          <button type="submit" disabled={loading || !prUrl.trim() || !pat.trim()}>
+            {loading ? 'Checking...' : 'Check Status'}
+          </button>
+        </form>
 
-            {/* Builds Info */}
-            {prStatus.builds.length > 0 && (
-              <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
-                <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <span>🔨</span>
-                  Related Builds
-                </h3>
-                <div className="space-y-3">
-                  {prStatus.builds.slice(0, 5).map((build) => (
-                    <div
-                      key={build.id}
-                      className="flex items-center justify-between bg-slate-700/50 rounded-lg px-4 py-3"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span
-                          className={`w-3 h-3 rounded-full ${
-                            build.result === 'succeeded'
-                              ? 'bg-green-500'
-                              : build.result === 'failed'
-                              ? 'bg-red-500'
-                              : build.status === 'inProgress'
-                              ? 'bg-yellow-500 animate-pulse'
-                              : 'bg-slate-500'
-                          }`}
-                        ></span>
-                        <span className="text-white font-medium">
-                          {build.definition.name}
-                        </span>
-                        <span className="text-slate-400">#{build.buildNumber}</span>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-slate-400 text-sm">
-                          {new Date(build.finishTime || build.startTime).toLocaleString()}
-                        </span>
-                        {build._links?.web?.href && (
-                          <a
-                            href={build._links.web.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-400 hover:text-blue-300 text-sm"
-                          >
-                            View →
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+        {error && (
+          <div className="error-box">
+            <span>⚠️</span> {error}
+          </div>
+        )}
+
+        {result && (
+          <>
+          {/* PR Info */}
+          <div className="pr-info">
+            <h2>{result.prInfo.title}</h2>
+            <div className="pr-meta">
+              <span>PR #{result.prInfo.id}</span>
+              <span>•</span>
+              <span>{result.prInfo.repository.name}</span>
+              <span>•</span>
+              <span className={`pr-status pr-status-${result.prInfo.status}`}>
+                {result.prInfo.status}
+              </span>
+            </div>
+            {result.prInfo.mergeCommitId && (
+              <div className="merge-commit">
+                Merge commit: <code>{result.prInfo.mergeCommitId.substring(0, 8)}</code>
               </div>
             )}
           </div>
-        )}
 
-        {/* Footer */}
-        <div className="mt-12 text-center text-slate-500 text-sm">
-          <p>
-            Train Tracker - Fabric Deployment Status Viewer
-          </p>
-          <p className="mt-1">
-            <a
-              href="https://aka.ms/pbitrains"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300"
-            >
-              View Train Schedule Status →
-            </a>
-          </p>
+          {/* BE Not Supported Warning */}
+          {!result.supportedRepo && (
+            <div className="warning-box">
+              <span className="warning-icon">🚧</span>
+              <div>
+                <strong>BE Repository Not Supported</strong>
+                <p>{result.unsupportedMessage}</p>
+              </div>
+            </div>
+          )}
+
+          {/* PR Not Merged Warning */}
+          {result.supportedRepo && result.unsupportedMessage && (
+            <div className="info-box">
+              <span>ℹ️</span>
+              <p>{result.unsupportedMessage}</p>
+            </div>
+          )}
+        </>
+      )}
+
+        {/* Environment Status - Always visible */}
+        <div className="environments">
+          <h3>Environment Status</h3>
+          
+          {/* Train Animation during loading */}
+          {loading && (
+            <div className="train-loading">
+              <div className="train-track-line"></div>
+              <div className="train-moving">🚂</div>
+            </div>
+          )}
+          
+          <div className={`env-pipeline ${loading ? 'loading' : ''}`}>
+            {FE_ENVIRONMENTS.map((env) => {
+              const envData = getEnvironmentData(env.id);
+              const hasData = envData !== null;
+              
+              return (
+                <div key={env.id} className="env-stage">
+                  <div className={`env-node ${hasData ? getStatusColor(envData.status) : 'status-pending'}`}>
+                    <span className="env-icon">
+                      {hasData ? getStatusIcon(envData.status) : '○'}
+                    </span>
+                  </div>
+                  <div className="env-info">
+                    <div className="env-name">{env.displayName}</div>
+                    <div className="env-date">
+                      {hasData && envData.status === 'included' && envData.buildTimestamp && (
+                        <span className="env-time">{new Date(envData.buildTimestamp).toLocaleDateString()}</span>
+                      )}
+                      {hasData && envData.status === 'not-included' && envData.expectedDate && (
+                        <span className="env-expected">ETA: {new Date(envData.expectedDate).toLocaleDateString()}</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Legend */}
+          <div className="legend">
+            <div className="legend-item">
+              <span className="legend-dot included"></span>
+              <span>Included</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-dot not-included"></span>
+              <span>Not yet</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-dot in-progress"></span>
+              <span>In progress</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-dot pending"></span>
+              <span>Pending</span>
+            </div>
+          </div>
         </div>
       </div>
+
+      <footer className="footer">
+        <p>FE Train Tracker - Fabric PowerBIClients Deployment Status</p>
+        <p>
+          <a
+            href="https://aka.ms/pbitrains"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Train Schedule Status →
+          </a>
+        </p>
+      </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

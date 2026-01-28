@@ -1,84 +1,92 @@
-import { DeploymentStatus, PLG_ENVIRONMENTS, PLGEnvironment } from '../types'
+import { DeploymentStatus, TrainSchedule } from '../types'
 
 interface DeploymentPipelineProps {
   deployments: DeploymentStatus[]
+  trainInfo?: TrainSchedule
   prMergeDate?: string
 }
 
-function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: DeploymentPipelineProps) {
-  // Map deployment status to PLG environments
-  const getDeploymentForEnv = (env: PLGEnvironment): DeploymentStatus | undefined => {
-    return deployments.find(
-      (d) => d.environment.toLowerCase() === env.adoEnvName.toLowerCase() ||
-             d.environment.toLowerCase().includes(env.name.toLowerCase())
-    )
-  }
+// Standard environment order
+const ENVIRONMENT_ORDER = ['EDOG', 'Daily', 'DXT', 'MSIT', 'Canary1', 'Canary2', 'PROD'];
 
-  const getDeployedCount = (): number => {
-    return PLG_ENVIRONMENTS.filter(env => {
-      const deployment = getDeploymentForEnv(env)
-      return deployment?.status === 'deployed'
-    }).length
-  }
+function DeploymentPipeline({ deployments, trainInfo, prMergeDate }: DeploymentPipelineProps) {
+  
+  // Sort deployments by environment order
+  const sortedDeployments = [...deployments].sort((a, b) => {
+    const getOrder = (env: string) => {
+      const name = env.replace(/^(FE|BE)\s+/i, '').replace(/\s+/g, '');
+      return ENVIRONMENT_ORDER.findIndex(e => 
+        name.toLowerCase().includes(e.toLowerCase())
+      );
+    };
+    return getOrder(a.environment) - getOrder(b.environment);
+  });
+
+  const getObservedCount = (): number => {
+    return deployments.filter(d => d.observedStatus === 'observed').length;
+  };
 
   const getProgressPercentage = (): number => {
-    return Math.round((getDeployedCount() / PLG_ENVIRONMENTS.length) * 100)
-  }
+    return deployments.length > 0 ? Math.round((getObservedCount() / deployments.length) * 100) : 0;
+  };
 
-  const getStatusIcon = (status?: DeploymentStatus['status']): string => {
-    switch (status) {
-      case 'deployed': return '✅'
-      case 'inProgress': return '🔄'
-      case 'pending': return '⏳'
-      case 'notDeployed': return '⬜'
-      case 'unknown': return '❓'
-      default: return '⬜'
-    }
-  }
+  const getStatusIcon = (dep: DeploymentStatus): string => {
+    if (dep.observedStatus === 'observed') return '✅';
+    if (dep.observedStatus === 'in-progress') return '🔄';
+    if (dep.expectedStatus === 'arrived') return '🕐'; // Expected to have arrived but not observed
+    return '⏳'; // Expected in future
+  };
 
-  const getStatusColor = (status?: DeploymentStatus['status']): string => {
-    switch (status) {
-      case 'deployed': return 'bg-green-500'
-      case 'inProgress': return 'bg-blue-500 animate-pulse'
-      case 'pending': return 'bg-yellow-500'
-      case 'unknown': return 'bg-gray-400'
-      default: return 'bg-slate-600'
-    }
-  }
+  const getStatusColor = (dep: DeploymentStatus): string => {
+    if (dep.observedStatus === 'observed') return 'bg-green-500';
+    if (dep.observedStatus === 'in-progress') return 'bg-blue-500 animate-pulse';
+    if (dep.expectedStatus === 'arrived') return 'bg-yellow-500';
+    return 'bg-slate-600';
+  };
 
-  const getStatusBorderColor = (status?: DeploymentStatus['status']): string => {
-    switch (status) {
-      case 'deployed': return 'border-green-500'
-      case 'inProgress': return 'border-blue-500'
-      case 'pending': return 'border-yellow-500'
-      case 'unknown': return 'border-gray-400'
-      default: return 'border-slate-600'
-    }
-  }
+  const getStatusBorderColor = (dep: DeploymentStatus): string => {
+    if (dep.observedStatus === 'observed') return 'border-green-500';
+    if (dep.observedStatus === 'in-progress') return 'border-blue-500';
+    if (dep.expectedStatus === 'arrived') return 'border-yellow-500';
+    return 'border-slate-600';
+  };
 
-  const getStatusText = (status?: DeploymentStatus['status']): string => {
-    switch (status) {
-      case 'deployed': return 'Deployed'
-      case 'inProgress': return 'In Progress'
-      case 'pending': return 'Pending'
-      case 'unknown': return 'Unknown'
-      default: return 'Not Deployed'
-    }
-  }
+  const getStatusText = (dep: DeploymentStatus): string => {
+    if (dep.observedStatus === 'observed') return 'Observed ✓';
+    if (dep.observedStatus === 'in-progress') return 'In Progress';
+    if (dep.expectedStatus === 'arrived') return 'Expected (Not Observed)';
+    return 'Expected';
+  };
 
   const formatDate = (dateString?: string): string => {
-    if (!dateString) return '-'
-    const date = new Date(dateString)
+    if (!dateString) return '-';
+    const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
-    })
-  }
+    });
+  };
 
-  const deployedCount = getDeployedCount()
-  const isFullyDeployed = deployedCount === PLG_ENVIRONMENTS.length
+  const formatExpectedDate = (dateString?: string): string => {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    const now = new Date();
+    const isPast = date < now;
+    
+    const formatted = date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric'
+    });
+    
+    return isPast ? `~${formatted}` : formatted;
+  };
+
+  const observedCount = getObservedCount();
+  const isFullyObserved = observedCount === deployments.length;
+  const repoType = deployments[0]?.environment.startsWith('FE') ? 'Frontend' : 
+                   deployments[0]?.environment.startsWith('BE') ? 'Backend' : 'Unknown';
 
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl">
@@ -87,14 +95,16 @@ function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: Deployme
         <div className="flex items-center gap-3">
           <span className="text-3xl">🚂</span>
           <div>
-            <h3 className="text-xl font-bold text-white">PLG Deployment Pipeline</h3>
-            <p className="text-slate-400 text-sm">Track your code through environments</p>
+            <h3 className="text-xl font-bold text-white">Train Deployment Tracker</h3>
+            <p className="text-slate-400 text-sm">
+              {repoType} • {trainInfo ? `Train ${trainInfo.trainId}` : 'Calculating train...'}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <div className="text-2xl font-bold text-white">{deployedCount}/{PLG_ENVIRONMENTS.length}</div>
-            <div className="text-xs text-slate-400">Environments</div>
+            <div className="text-2xl font-bold text-white">{observedCount}/{deployments.length}</div>
+            <div className="text-xs text-slate-400">Observed</div>
           </div>
           <div className="relative w-16 h-16">
             <svg className="w-16 h-16 transform -rotate-90">
@@ -115,7 +125,7 @@ function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: Deployme
                 strokeWidth="4"
                 fill="none"
                 strokeDasharray={`${getProgressPercentage() * 1.76} 176`}
-                className={isFullyDeployed ? 'text-green-500' : 'text-blue-500'}
+                className={isFullyObserved ? 'text-green-500' : 'text-blue-500'}
                 strokeLinecap="round"
               />
             </svg>
@@ -126,13 +136,43 @@ function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: Deployme
         </div>
       </div>
 
+      {/* Train Info Banner */}
+      {trainInfo && (
+        <div className="mb-6 p-4 bg-slate-900/50 border border-slate-700/50 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-lg">📅</span>
+            <span className="text-white font-semibold">Train Schedule</span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+            <div>
+              <span className="text-slate-400">Merged:</span>
+              <span className="text-white ml-2">{prMergeDate ? formatDate(prMergeDate) : '-'}</span>
+            </div>
+            <div>
+              <span className="text-slate-400">Train Fork:</span>
+              <span className="text-white ml-2">{trainInfo.forkDate.toLocaleDateString()}</span>
+            </div>
+            <div>
+              <span className="text-slate-400">Train ID:</span>
+              <span className="text-blue-400 ml-2 font-mono">{trainInfo.trainId}</span>
+            </div>
+            <div>
+              <span className="text-slate-400">Status:</span>
+              <span className={`ml-2 ${trainInfo.prIncluded ? 'text-green-400' : 'text-yellow-400'}`}>
+                {trainInfo.prIncluded ? '✓ In Train' : '⏳ Next Train'}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Status Banner */}
-      {isFullyDeployed && (
+      {isFullyObserved && (
         <div className="mb-6 p-4 bg-green-900/30 border border-green-500/50 rounded-lg flex items-center gap-3">
           <span className="text-2xl">🎉</span>
           <div>
-            <p className="text-green-400 font-semibold">Fully Deployed!</p>
-            <p className="text-green-300/70 text-sm">Your code is live in all PLG environments</p>
+            <p className="text-green-400 font-semibold">Fully Observed!</p>
+            <p className="text-green-300/70 text-sm">Your code has been observed in all tracked environments</p>
           </div>
         </div>
       )}
@@ -151,25 +191,25 @@ function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: Deployme
 
           {/* Environment Nodes */}
           <div className="relative z-10 flex justify-between items-center py-4">
-            {PLG_ENVIRONMENTS.map((env, index) => {
-              const deployment = getDeploymentForEnv(env)
-              const isDeployed = deployment?.status === 'deployed'
-              const isInProgress = deployment?.status === 'inProgress'
+            {sortedDeployments.map((dep) => {
+              const isObserved = dep.observedStatus === 'observed';
+              const isInProgress = dep.observedStatus === 'in-progress';
+              const isExpectedArrived = dep.expectedStatus === 'arrived' && !isObserved;
               
               return (
-                <div key={env.id} className="flex flex-col items-center group">
+                <div key={dep.environment} className="flex flex-col items-center group">
                   {/* Node */}
                   <div 
                     className={`
                       relative w-12 h-12 rounded-full flex items-center justify-center 
-                      border-4 ${getStatusBorderColor(deployment?.status)}
-                      ${isDeployed ? 'bg-green-500/20' : isInProgress ? 'bg-blue-500/20' : 'bg-slate-800'}
+                      border-4 ${getStatusBorderColor(dep)}
+                      ${isObserved ? 'bg-green-500/20' : isInProgress ? 'bg-blue-500/20' : isExpectedArrived ? 'bg-yellow-500/20' : 'bg-slate-800'}
                       transition-all duration-300 cursor-pointer
-                      hover:scale-110 hover:shadow-lg hover:shadow-${isDeployed ? 'green' : 'blue'}-500/25
+                      hover:scale-110 hover:shadow-lg
                     `}
-                    title={`${env.displayName}: ${getStatusText(deployment?.status)}`}
+                    title={`${dep.environment}: ${getStatusText(dep)}`}
                   >
-                    <span className="text-xl">{getStatusIcon(deployment?.status)}</span>
+                    <span className="text-xl">{getStatusIcon(dep)}</span>
                     
                     {/* Pulse animation for in-progress */}
                     {isInProgress && (
@@ -181,37 +221,33 @@ function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: Deployme
                   <div className="mt-3 text-center">
                     <div className={`
                       font-semibold text-sm
-                      ${isDeployed ? 'text-green-400' : isInProgress ? 'text-blue-400' : 'text-slate-400'}
+                      ${isObserved ? 'text-green-400' : isInProgress ? 'text-blue-400' : isExpectedArrived ? 'text-yellow-400' : 'text-slate-400'}
                     `}>
-                      {env.displayName}
+                      {dep.environment.replace(/^(FE|BE)\s+/i, '')}
                     </div>
-                    <div className={`
-                      text-xs px-2 py-0.5 rounded-full mt-1
-                      ${env.type === 'prod' ? 'bg-red-500/20 text-red-300' : 'bg-slate-700 text-slate-400'}
-                    `}>
-                      {env.type === 'prod' ? 'PROD' : 'Pre-Prod'}
+                    <div className="text-xs text-slate-500 mt-0.5">
+                      {dep.expectedDate ? formatExpectedDate(dep.expectedDate) : ''}
                     </div>
                   </div>
 
                   {/* Tooltip with details */}
-                  {deployment?.timestamp && (
-                    <div className="
-                      absolute -bottom-16 left-1/2 -translate-x-1/2
-                      bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 
-                      opacity-0 group-hover:opacity-100 transition-opacity
-                      whitespace-nowrap text-xs z-20 shadow-xl
-                    ">
-                      <div className="text-slate-300">{formatDate(deployment.timestamp)}</div>
-                      {deployment.buildNumber && (
-                        <div className="text-slate-500">Build: {deployment.buildNumber}</div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Connector line */}
-                  {index < PLG_ENVIRONMENTS.length - 1 && (
-                    <div className="hidden lg:block absolute top-6 left-12 w-full h-0.5 bg-transparent pointer-events-none"></div>
-                  )}
+                  <div className="
+                    absolute -bottom-20 left-1/2 -translate-x-1/2
+                    bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 
+                    opacity-0 group-hover:opacity-100 transition-opacity
+                    whitespace-nowrap text-xs z-20 shadow-xl pointer-events-none
+                  ">
+                    <div className="text-slate-300">{getStatusText(dep)}</div>
+                    {dep.observedTimestamp && (
+                      <div className="text-slate-500">Observed: {formatDate(dep.observedTimestamp)}</div>
+                    )}
+                    {dep.observedBuildNumber && (
+                      <div className="text-slate-500">Build: {dep.observedBuildNumber}</div>
+                    )}
+                    {!dep.observedTimestamp && dep.expectedDate && (
+                      <div className="text-slate-500">Expected: {formatExpectedDate(dep.expectedDate)}</div>
+                    )}
+                  </div>
                 </div>
               )
             })}
@@ -225,65 +261,75 @@ function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: Deployme
           <thead>
             <tr className="border-b border-slate-700/50">
               <th className="text-left py-3 px-4 text-slate-400 font-medium text-sm uppercase tracking-wider">Environment</th>
-              <th className="text-left py-3 px-4 text-slate-400 font-medium text-sm uppercase tracking-wider">Status</th>
-              <th className="text-left py-3 px-4 text-slate-400 font-medium text-sm uppercase tracking-wider">Deployed At</th>
+              <th className="text-left py-3 px-4 text-slate-400 font-medium text-sm uppercase tracking-wider">Observed</th>
+              <th className="text-left py-3 px-4 text-slate-400 font-medium text-sm uppercase tracking-wider">Expected</th>
               <th className="text-left py-3 px-4 text-slate-400 font-medium text-sm uppercase tracking-wider">Build</th>
               <th className="text-right py-3 px-4 text-slate-400 font-medium text-sm uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {PLG_ENVIRONMENTS.map((env) => {
-              const deployment = getDeploymentForEnv(env)
-              const isDeployed = deployment?.status === 'deployed'
+            {sortedDeployments.map((dep) => {
+              const isObserved = dep.observedStatus === 'observed';
+              const isExpectedArrived = dep.expectedStatus === 'arrived';
               
               return (
                 <tr 
-                  key={env.id}
+                  key={dep.environment}
                   className={`
                     border-b border-slate-700/30 
                     hover:bg-slate-700/30 transition-colors
-                    ${isDeployed ? 'bg-green-500/5' : ''}
+                    ${isObserved ? 'bg-green-500/5' : ''}
                   `}
                 >
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-3">
-                      <div className={`w-3 h-3 rounded-full ${getStatusColor(deployment?.status)}`}></div>
+                      <div className={`w-3 h-3 rounded-full ${getStatusColor(dep)}`}></div>
                       <div>
-                        <div className="text-white font-medium">{env.displayName}</div>
-                        <div className="text-slate-500 text-xs">{env.adoEnvName}</div>
+                        <div className="text-white font-medium">{dep.environment}</div>
+                        <div className="text-slate-500 text-xs">
+                          {dep.deploymentType === 'continuous' ? 'Continuous' : 'Train-based'}
+                        </div>
                       </div>
-                      {env.type === 'prod' && (
-                        <span className="px-2 py-0.5 text-xs bg-red-500/20 text-red-400 rounded-full">PROD</span>
-                      )}
                     </div>
                   </td>
                   <td className="py-4 px-4">
-                    <span className={`
-                      inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium
-                      ${isDeployed ? 'bg-green-500/20 text-green-400' : 
-                        deployment?.status === 'inProgress' ? 'bg-blue-500/20 text-blue-400' :
-                        deployment?.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
-                        'bg-slate-600/20 text-slate-400'}
-                    `}>
-                      {getStatusIcon(deployment?.status)}
-                      {getStatusText(deployment?.status)}
-                    </span>
+                    {isObserved ? (
+                      <div>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-green-500/20 text-green-400">
+                          ✅ Observed
+                        </span>
+                        <div className="text-slate-500 text-xs mt-1">
+                          {dep.observedTimestamp ? formatDate(dep.observedTimestamp) : ''}
+                        </div>
+                      </div>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-slate-600/20 text-slate-400">
+                        Not Observed
+                      </span>
+                    )}
                   </td>
-                  <td className="py-4 px-4 text-slate-400 text-sm">
-                    {deployment?.timestamp ? formatDate(deployment.timestamp) : '-'}
+                  <td className="py-4 px-4 text-sm">
+                    {dep.expectedDate && (
+                      <div className={isExpectedArrived && !isObserved ? 'text-yellow-400' : 'text-slate-400'}>
+                        {formatExpectedDate(dep.expectedDate)}
+                        {isExpectedArrived && !isObserved && (
+                          <span className="ml-2 text-xs">(should have arrived)</span>
+                        )}
+                      </div>
+                    )}
                   </td>
                   <td className="py-4 px-4 text-slate-400 text-sm font-mono">
-                    {deployment?.buildNumber || '-'}
+                    {dep.observedBuildNumber || '-'}
                   </td>
                   <td className="py-4 px-4 text-right">
-                    {deployment?.url ? (
+                    {dep.buildUrl ? (
                       <a
-                        href={deployment.url}
+                        href={dep.buildUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded-lg transition-colors"
                       >
-                        View
+                        View Build
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
@@ -303,20 +349,23 @@ function DeploymentPipeline({ deployments, prMergeDate: _prMergeDate }: Deployme
       <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-slate-400">
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
-          <span>Deployed</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
-          <span>In Progress</span>
+          <span>Observed in build</span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <span>Pending</span>
+          <span>Expected (not observed)</span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-full bg-slate-600"></div>
-          <span>Not Deployed</span>
+          <span>Expected in future</span>
         </div>
+      </div>
+
+      {/* Disclaimer */}
+      <div className="mt-4 p-3 bg-slate-900/30 rounded-lg text-xs text-slate-500">
+        <strong>Note:</strong> "Observed" means we found your code in a deployment build. 
+        "Expected" dates are estimates based on the train schedule. 
+        For authoritative deployment status, check the official deployment dashboards.
       </div>
     </div>
   )
