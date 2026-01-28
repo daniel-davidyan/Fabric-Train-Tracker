@@ -177,6 +177,9 @@ function App() {
                   <div className="env-info">
                     <div className="env-name">{env.displayName}</div>
                     <div className="env-date">
+                      {hasData && envData.status === 'included' && envData.buildTimestamp && (
+                        <span className="env-time">{new Date(envData.buildTimestamp).toLocaleDateString()}</span>
+                      )}
                       {hasData && envData.status === 'not-included' && envData.expectedDate && (
                         <span className="env-expected">ETA: {new Date(envData.expectedDate).toLocaleDateString()}</span>
                       )}
@@ -210,7 +213,7 @@ function App() {
       </div>
 
       <footer className="footer">
-        <p>FE Train Tracker - Fabric PowerBIClients Deployment Status</p>
+        <p>Fabric TRAIN TRACKER - Fabric PowerBIClients Deployment Status</p>
         <p>
           <a
             href="https://aka.ms/pbitrains"

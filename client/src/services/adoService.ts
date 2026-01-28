@@ -230,15 +230,24 @@ async function checkEnvironmentStatus(
       });
     const ancestorResults = await Promise.all(ancestorPromises);
 
-    // Find first included build (earliest successful deployment)
-    const includedResult = ancestorResults.find(r => r.isAncestor);
-    if (includedResult) {
+    // Find all builds that include the PR
+    const includedBuilds = ancestorResults.filter(r => r.isAncestor);
+    
+    if (includedBuilds.length > 0) {
+      // Sort by timestamp to find the EARLIEST deployment (when PR first arrived)
+      includedBuilds.sort((a, b) => {
+        const timeA = new Date(a.record.finishTime || a.record.startTime).getTime();
+        const timeB = new Date(b.record.finishTime || b.record.startTime).getTime();
+        return timeA - timeB; // Ascending - earliest first
+      });
+      
+      const earliest = includedBuilds[0];
       return {
         status: 'included',
-        buildId: includedResult.build.id,
-        buildNumber: includedResult.build.buildNumber,
-        buildTimestamp: includedResult.record.finishTime || includedResult.record.startTime,
-        buildUrl: includedResult.build._links?.web?.href,
+        buildId: earliest.build.id,
+        buildNumber: earliest.build.buildNumber,
+        buildTimestamp: earliest.record.finishTime || earliest.record.startTime,
+        buildUrl: earliest.build._links?.web?.href,
       };
     }
 
