@@ -7,6 +7,7 @@ import {
   ADOEnvironment,
   ALL_TRACKED_ENVIRONMENTS,
 } from '../types';
+import { buildVsrmApiBaseUrl } from './urlParser';
 
 const API_VERSION = '7.1';
 const API_VERSION_PREVIEW = '7.1-preview.1';
@@ -98,6 +99,31 @@ interface ADOEnvironmentDeploymentRecord {
 interface ADOEnvironmentDeploymentRecordsResponse {
   value: ADOEnvironmentDeploymentRecord[];
   count: number;
+}
+
+// Minimal Release Interface
+interface ADORelease {
+  id: number;
+  name: string;
+  status: string;
+  createdOn: string;
+  artifacts: Array<{
+    alias: string;
+    definitionReference: {
+      version: {
+        id: string; // Build ID or Commit ID
+        name?: string;
+      };
+      project: {
+        id: string;
+      };
+    };
+  }>;
+  _links: {
+    web: {
+      href: string;
+    };
+  };
 }
 
 function buildDirectBaseUrl(parsed: ParsedPRUrl): string {
@@ -257,6 +283,25 @@ export class ADOService {
       return response;
     } catch (error) {
       console.warn(`Could not fetch build ${buildId}:`, error);
+      return null;
+    }
+  }
+
+  /**
+   * Get release details by ID (fallback for Classic Release deployments)
+   */
+  async getReleaseById(releaseId: number): Promise<ADORelease | null> {
+    const vsrmBaseUrl = buildVsrmApiBaseUrl(this.parsedUrl);
+    const url = `${vsrmBaseUrl}/_apis/release/releases/${releaseId}?api-version=${API_VERSION}`;
+    console.log(`      🔍 Fetching release ${releaseId}: ${url}`);
+    
+    try {
+      // Create a temporary fetcher for VSRM that doesn't use the default baseUrl
+      // or just use fetchAdo which takes full URL
+      const response = await this.fetchAdo<ADORelease>(url);
+      return response;
+    } catch (error) {
+      console.warn(`Could not fetch release ${releaseId}:`, error);
       return null;
     }
   }
@@ -422,45 +467,100 @@ export class ADOService {
             return null; // Ignore failed/other states if no success/progress
           })
           .filter(r => r !== null) // Remove nulls
-          .sort((a, b) => {
-            const aDate = new Date(a.finishTime || a.startTime || a.queueTime);
-            const bDate = new Date(b.finishTime || b.startTime || b.queueTime);
-            return bDate.getTime() - aDate.getTime();
-          });
-
-        if (validDeployments.length === 0) {
-          deployments.push({
-            environment: env.adoEnvName,
-            environmentId: env.adoEnvId,
-            status: 'notDeployed',
-            deploymentType: env.deploymentType,
-          });
-          continue;
-        }
-
-        let confirmedDeployment = null;
-        let deploymentStatus: DeploymentStatus['status'] = 'deployed';
+          .Deep scan to handle mixed repo deployments (skip cross-repo) and 404s (Releases vs Builds)
+        const maxChecks = 10;
+        let successfulChecks = 0;
         
-        // Limit checks to save time/API calls. PLG needs ancestry check (slow), others need build fetch (fast)
-        const checksLimit = 5;
+        console.log(`    📋 Scanning deployment history for ${env.displayName} (checking up to ${maxChecks} candidates from ${validDeployments.length} records)...`);
         
-        console.log(`    📋 Checking up to ${checksLimit} recent deployments for ${env.displayName}...`);
-        
-        for (const deployment of validDeployments.slice(0, checksLimit)) {
-          const buildId = deployment.owner?.id;
-          if (!buildId) continue;
+        for (const deployment of validDeployments) {
+          if (successfulChecks >= maxChecks) break;
           
-          // Get build details to see branch and sourceVersion
-          const build = await this.getBuildById(buildId);
-          if (!build || !build.sourceVersion) {
-            console.log(`    Build ${buildId}: Could not fetch details`);
-            continue;
+          const ownerId = deployment.owner?.id;
+          if (!ownerId) continue;
+          
+          let sourceVersion: string | undefined;
+          let buildStartTime: Date | undefined;
+          let webUrl = deployment.owner?._links?.web?.href;
+
+          // Try to get as Build first
+          const build = await this.getBuildById(ownerId);
+          
+          if (build && build.sourceVersion) {
+            sourceVersion = build.sourceVersion;
+            buildStartTime = new Date(build.startTime);
+            webUrl = build._links.web.href || webUrl;
+          } else {
+             // Fallback: Try to get as Release
+             console.log(`    Build ${ownerId} not found or validity check failed. Trying as Release...`);
+             const release = await this.getReleaseById(ownerId);
+             
+             if (release) {
+               console.log(`    📥 Release ${ownerId} found. Checking artifacts...`);
+               webUrl = release._links.web.href || webUrl;
+               if (release.createdOn) buildStartTime = new Date(release.createdOn);
+
+               // Find primary artifact (assuming it provides source version)
+               // For classic releases, we look for the primary artifact which is usually the build
+               const primaryArtifact = release.artifacts[0]; // Simplification: take first
+               if (primaryArtifact && primaryArtifact.definitionReference?.version) {
+                  const versionId = primaryArtifact.definitionReference.version.id;
+                  console.log(`    Release maps to artifact version: ${versionId}`);
+                  
+                  // If versionId looks like a commit (40 chars hex) -> use it
+                  // If it looks like a build ID (digits) -> fetch that build
+                  if (/^[0-9a-f]{40}$/i.test(versionId)) {
+                     sourceVersion = versionId;
+                  } else {
+                     // Try to fetch the artifact build
+                     const artifactBuildId = parseInt(versionId);
+                     if (!isNaN(artifactBuildId)) {
+                       const artifactBuild = await this.getBuildById(artifactBuildId);
+                       if (artifactBuild) {
+                         sourceVersion = artifactBuild.sourceVersion;
+                         // Use artifact timestamp if release timestamp missing? No release timestamp is deployment time.
+                       }
+                     }
+                  }
+               }
+             }
           }
+
+          if (!sourceVersion) {
+             console.log(`    ⚠️ Could not resolve source version for deployment ${ownerId}. Skipping.`);
+             continue; 
+          }
+          
+          successfulChecks++;
           
           let isMatch = false;
 
           if (env.product === 'PLG') {
             // PLG: Same-Repo Ancestry Check (Strict)
+            isMatch = await this.isCommitAncestor(mergeCommitId, sourceVersion);
+          } else {
+            // RDL/VIZ: Cross-Repo Time-Based Heuristic
+            if (buildStartTime) {
+              const prMergeTime = new Date(closedDate);
+              isMatch = buildStartTime > prMergeTime;
+            }
+          }
+
+          if (isMatch) {
+            console.log(`    ✅ Match found in deployment metadata (Build/Release ${ownerId})`);
+            confirmedDeployment = deployment;
+            
+            // Determine status based on deployment result
+            if (!deployment.result && deployment.startTime && !deployment.finishTime) {
+               deploymentStatus = 'inProgress';
+            } else if (deployment.result?.toLowerCase() === 'succeeded') {
+               deploymentStatus = 'deployed';
+            } else {
+               deploymentStatus = 'unknown';
+            }
+            // Update URL to point to the actual build/release
+            if (confirmedDeployment.owner?._links?.web) {
+               confirmedDeployment.owner._links.web.href = webUrl || confirmedDeployment.owner._links.web.hrefk (Strict)
             isMatch = await this.isCommitAncestor(mergeCommitId, build.sourceVersion);
           } else {
             // RDL/VIZ: Cross-Repo Time-Based Heuristic
