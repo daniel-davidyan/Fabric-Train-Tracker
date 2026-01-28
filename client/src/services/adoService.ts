@@ -106,15 +106,11 @@ export async function checkPRDeploymentStatus(prUrl: string, pat: string): Promi
     };
   }
 
-  // Calculate expected dates based on train schedule
-  const mergeDate = prInfo.closedDate ? new Date(prInfo.closedDate) : new Date();
-  const expectedDates = calculateExpectedDates(mergeDate);
-
   // Check ALL environments in PARALLEL for speed (6 concurrent requests)
+  // Each environment check now returns its own expectedDate based on actual deployment data
   const environmentPromises = FE_ENVIRONMENTS.map(async (env) => {
     const status = await checkEnvironmentStatus(parsed.organization, env.id, prInfo.mergeCommitId!, headers);
-    const expectedDate = expectedDates[env.name.toLowerCase()] || undefined;
-    return { environment: env, ...status, expectedDate };
+    return { environment: env, ...status };
   });
 
   const environments = await Promise.all(environmentPromises);
@@ -122,44 +118,38 @@ export async function checkPRDeploymentStatus(prUrl: string, pat: string): Promi
   return { prInfo, environments, supportedRepo: true };
 }
 
-// Calculate expected deployment dates based on weekly train schedule
-// Trains fork every Thursday ~10pm PST
-function calculateExpectedDates(mergeDate: Date): Record<string, string> {
-  // Find next Thursday (train fork day)
-  const dayOfWeek = mergeDate.getDay(); // 0=Sun, 4=Thu
-  let daysUntilThursday: number;
+// Calculate next deployment date based on actual deployment frequency from ADO records
+function calculateNextDeploymentDate(succeededRecords: ADOEnvironmentDeploymentRecord[]): string | undefined {
+  if (succeededRecords.length < 2) return undefined;
   
-  if (dayOfWeek < 4) {
-    daysUntilThursday = 4 - dayOfWeek;
-  } else if (dayOfWeek === 4) {
-    // If Thursday, check if before 10pm PST
-    daysUntilThursday = mergeDate.getHours() < 22 ? 0 : 7;
-  } else {
-    daysUntilThursday = (11 - dayOfWeek);
+  // Sort by finish time descending (most recent first)
+  const sortedRecords = [...succeededRecords]
+    .filter(r => r.finishTime)
+    .sort((a, b) => new Date(b.finishTime!).getTime() - new Date(a.finishTime!).getTime());
+  
+  if (sortedRecords.length < 2) return undefined;
+  
+  // Calculate average interval between deployments
+  let totalInterval = 0;
+  for (let i = 0; i < sortedRecords.length - 1; i++) {
+    const current = new Date(sortedRecords[i].finishTime!).getTime();
+    const previous = new Date(sortedRecords[i + 1].finishTime!).getTime();
+    totalInterval += current - previous;
+  }
+  const avgInterval = totalInterval / (sortedRecords.length - 1);
+  
+  // Estimate next deployment: last deployment + average interval
+  const lastDeployment = new Date(sortedRecords[0].finishTime!);
+  const nextDeployment = new Date(lastDeployment.getTime() + avgInterval);
+  
+  // If next deployment is in the past, add another interval
+  const now = new Date();
+  if (nextDeployment < now) {
+    const intervalsToAdd = Math.ceil((now.getTime() - nextDeployment.getTime()) / avgInterval);
+    nextDeployment.setTime(nextDeployment.getTime() + intervalsToAdd * avgInterval);
   }
   
-  const forkDate = new Date(mergeDate);
-  forkDate.setDate(forkDate.getDate() + daysUntilThursday);
-  
-  // Train schedule offsets (days after fork)
-  const offsets: Record<string, number> = {
-    edog: 1,      // Friday
-    daily: 1,     // Friday  
-    dxt: 4,       // Monday
-    msit: 7,      // Thursday
-    canary1: 14,  // Thursday + 1 week
-    canary2: 17,  // Sunday + 2 weeks
-    prod: 21,     // Thursday + 3 weeks
-  };
-  
-  const result: Record<string, string> = {};
-  for (const [env, offset] of Object.entries(offsets)) {
-    const expectedDate = new Date(forkDate);
-    expectedDate.setDate(expectedDate.getDate() + offset);
-    result[env] = expectedDate.toISOString();
-  }
-  
-  return result;
+  return nextDeployment.toISOString();
 }
 
 async function fetchPRInfo(parsed: ParsedPRUrl, headers: Record<string, string>): Promise<PRInfo> {
@@ -195,7 +185,7 @@ async function checkEnvironmentStatus(
   environmentId: number,
   prMergeCommit: string,
   headers: Record<string, string>
-): Promise<{ status: EnvironmentDeploymentStatus['status']; buildId?: number; buildNumber?: string; buildTimestamp?: string; buildUrl?: string; }> {
+): Promise<{ status: EnvironmentDeploymentStatus['status']; buildId?: number; buildNumber?: string; buildTimestamp?: string; buildUrl?: string; expectedDate?: string; }> {
   try {
     const recordsUrl = 'https://dev.azure.com/' + organization + '/' + POWERBI_CLIENTS_PROJECT + '/_apis/distributedtask/environments/' + environmentId + '/environmentdeploymentrecords?top=10&api-version=7.1-preview.1';
     const recordsResponse = await fetch(recordsUrl, { headers });
@@ -205,11 +195,15 @@ async function checkEnvironmentStatus(
     const records: ADOEnvironmentDeploymentRecord[] = recordsData.value || [];
     if (records.length === 0) return { status: 'no-builds' };
 
-    // Collect unique succeeded build IDs
+    // Collect unique succeeded build IDs and their timestamps
     const buildMap = new Map<number, ADOEnvironmentDeploymentRecord>();
+    const succeededRecords: ADOEnvironmentDeploymentRecord[] = [];
     for (const record of records) {
       if (record.owner?.id && record.result?.toLowerCase() === 'succeeded') {
-        if (!buildMap.has(record.owner.id)) buildMap.set(record.owner.id, record);
+        if (!buildMap.has(record.owner.id)) {
+          buildMap.set(record.owner.id, record);
+          succeededRecords.push(record);
+        }
       }
     }
 
@@ -249,7 +243,10 @@ async function checkEnvironmentStatus(
     }
 
     if (inProgressRecord) return { status: 'in-progress' };
-    return { status: 'not-included' };
+    
+    // Calculate expected date based on actual deployment frequency
+    const expectedDate = calculateNextDeploymentDate(succeededRecords);
+    return { status: 'not-included', expectedDate };
   } catch (error) {
     console.error('Error checking environment ' + environmentId + ':', error);
     return { status: 'error' };
