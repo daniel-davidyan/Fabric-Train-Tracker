@@ -1,0 +1,505 @@
+{
+  "count": 50,
+  "value": [
+    {
+      "id": 137,
+      "name": "$(TargetBranchName)",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Vladimir Trunov (AKVELON INC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; _links=; id=e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; uniqueName=v-vltrun@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz; descriptor=aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz}",
+      "createdOn": "2023-03-24T21:00:23.8533333Z",
+      "lastModifiedBy": "@{displayName=Vladimir Trunov (AKVELON INC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; _links=; id=e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; uniqueName=v-vltrun@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz; descriptor=aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz}",
+      "lastModifiedOn": "2023-03-24T21:00:23.8533333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 332,
+      "name": "client-3p-Official-OneBranch",
+      "description": "",
+      "createdBy": "@{displayName=Atef Sawaed; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/52352ac1-e5bf-6150-9ccc-356a8ae0cb48; _links=; id=52352ac1-e5bf-6150-9ccc-356a8ae0cb48; uniqueName=atefsawaed@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NTIzNTJhYzEtZTViZi03MTUwLTljY2MtMzU2YThhZTBjYjQ4; descriptor=aad.NTIzNTJhYzEtZTViZi03MTUwLTljY2MtMzU2YThhZTBjYjQ4}",
+      "createdOn": "2024-11-05T09:51:06.74Z",
+      "lastModifiedBy": "@{displayName=Atef Sawaed; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/52352ac1-e5bf-6150-9ccc-356a8ae0cb48; _links=; id=52352ac1-e5bf-6150-9ccc-356a8ae0cb48; uniqueName=atefsawaed@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NTIzNTJhYzEtZTViZi03MTUwLTljY2MtMzU2YThhZTBjYjQ4; descriptor=aad.NTIzNTJhYzEtZTViZi03MTUwLTljY2MtMzU2YThhZTBjYjQ4}",
+      "lastModifiedOn": "2024-11-05T09:51:06.74Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 446,
+      "name": "Environment name",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Suraiya Begum K (MAQ LLC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/2c33cee6-d255-6a98-9eb0-f20157faa96e; _links=; id=2c33cee6-d255-6a98-9eb0-f20157faa96e; uniqueName=v-sbegumk@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl; descriptor=aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl}",
+      "createdOn": "2025-06-19T17:18:25.5533333Z",
+      "lastModifiedBy": "@{displayName=Suraiya Begum K (MAQ LLC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/2c33cee6-d255-6a98-9eb0-f20157faa96e; _links=; id=2c33cee6-d255-6a98-9eb0-f20157faa96e; uniqueName=v-sbegumk@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl; descriptor=aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl}",
+      "lastModifiedOn": "2025-06-19T17:18:25.5533333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 3,
+      "name": "iDog",
+      "description": "",
+      "createdBy": "@{displayName=Chaz Beck; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/7596ba70-4b08-4e83-9dc4-5f0d7252efb3; _links=; id=7596ba70-4b08-4e83-9dc4-5f0d7252efb3; uniqueName=chbeck@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.OGE4ZGZlN2ItYzEyNS03ZjUzLWI3ZDUtY2IyMzBiMjA0ZjU4; descriptor=aad.OGE4ZGZlN2ItYzEyNS03ZjUzLWI3ZDUtY2IyMzBiMjA0ZjU4}",
+      "createdOn": "2019-08-21T22:12:49.49Z",
+      "lastModifiedBy": "@{displayName=Chaz Beck; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/7596ba70-4b08-4e83-9dc4-5f0d7252efb3; _links=; id=7596ba70-4b08-4e83-9dc4-5f0d7252efb3; uniqueName=chbeck@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.OGE4ZGZlN2ItYzEyNS03ZjUzLWI3ZDUtY2IyMzBiMjA0ZjU4; descriptor=aad.OGE4ZGZlN2ItYzEyNS03ZjUzLWI3ZDUtY2IyMzBiMjA0ZjU4}",
+      "lastModifiedOn": "2019-08-21T22:12:49.49Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 138,
+      "name": "master",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Vladimir Trunov (AKVELON INC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; _links=; id=e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; uniqueName=v-vltrun@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz; descriptor=aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz}",
+      "createdOn": "2023-03-24T21:24:42.3433333Z",
+      "lastModifiedBy": "@{displayName=Vladimir Trunov (AKVELON INC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; _links=; id=e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; uniqueName=v-vltrun@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz; descriptor=aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz}",
+      "lastModifiedOn": "2023-03-24T21:24:42.3433333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 271,
+      "name": "PLG-CUSTOM",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-27T07:32:17.5866667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-27T07:32:17.5866667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 190,
+      "name": "PLG-Daily",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T00:32:30.8933333Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T00:32:30.8933333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 191,
+      "name": "PLG-DXT",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T00:43:06.0533333Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T00:43:06.0533333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 172,
+      "name": "PLG-EDOG",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-06-26T23:07:18.82Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-06-26T23:07:18.82Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 284,
+      "name": "PLG-FF",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-30T08:43:32.04Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-30T08:43:32.04Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 285,
+      "name": "PLG-MC",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-30T09:41:15.4066667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-30T09:41:15.4066667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 192,
+      "name": "PLG-MSIT",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T00:43:48.3066667Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T00:43:48.3066667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 507,
+      "name": "PLG-PF",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Subramanian Ganthimathinathan (LTIMindtree Limited); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; _links=; id=e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; uniqueName=v-sganthimat@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw; descriptor=aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw}",
+      "createdOn": "2025-11-10T11:21:33.6733333Z",
+      "lastModifiedBy": "@{displayName=Subramanian Ganthimathinathan (LTIMindtree Limited); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; _links=; id=e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; uniqueName=v-sganthimat@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw; descriptor=aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw}",
+      "lastModifiedOn": "2025-11-10T11:21:33.6733333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 223,
+      "name": "PLG-PROD",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-08-14T09:10:57.7833333Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-08-14T09:10:57.7833333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 231,
+      "name": "PLG-PROD-AMERICA",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-08-22T13:35:48.1066667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-08-22T13:35:48.1066667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 232,
+      "name": "PLG-PROD-ASIA",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-08-22T13:36:33.5033333Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-08-22T13:36:33.5033333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 310,
+      "name": "PLG-PROD-Canary1",
+      "description": "PLG-PROD-Canary1",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-10-23T22:43:09.93Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-10-23T22:43:09.93Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 300,
+      "name": "PLG-PROD-Canary2",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-10-22T08:15:27.28Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-10-22T08:15:27.28Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 233,
+      "name": "PLG-PROD-EUROPE",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-08-22T13:37:08.1866667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-08-22T13:37:08.1866667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 508,
+      "name": "PLG-TB",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Subramanian Ganthimathinathan (LTIMindtree Limited); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; _links=; id=e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; uniqueName=v-sganthimat@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw; descriptor=aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw}",
+      "createdOn": "2025-11-10T11:22:10.79Z",
+      "lastModifiedBy": "@{displayName=Subramanian Ganthimathinathan (LTIMindtree Limited); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; _links=; id=e39ce7c0-c5c0-6a01-ad6d-1d543c2ace00; uniqueName=v-sganthimat@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw; descriptor=aad.ZTM5Y2U3YzAtYzVjMC03YTAxLWFkNmQtMWQ1NDNjMmFjZTAw}",
+      "lastModifiedOn": "2025-11-10T11:22:10.79Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 312,
+      "name": "PLG-USN",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-10-24T17:34:23.6866667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-10-24T17:34:23.6866667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 311,
+      "name": "PLG-USS",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-10-24T17:34:22.5966667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-10-24T17:34:22.5966667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 139,
+      "name": "PRBuildDeploymentToCDN",
+      "description": "Used to safely deploying bits to CDN",
+      "createdBy": "@{displayName=Vladimir Trunov (AKVELON INC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; _links=; id=e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; uniqueName=v-vltrun@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz; descriptor=aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz}",
+      "createdOn": "2023-04-05T16:26:02.1433333Z",
+      "lastModifiedBy": "@{displayName=Vladimir Trunov (AKVELON INC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; _links=; id=e4ba1df4-4ac8-6e4a-9a90-9ed605a1f9f3; uniqueName=v-vltrun@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz; descriptor=aad.ZTRiYTFkZjQtNGFjOC03ZTRhLTlhOTAtOWVkNjA1YTFmOWYz}",
+      "lastModifiedOn": "2023-04-05T16:26:02.1433333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 363,
+      "name": "R2D-Approval",
+      "description": "",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-12-18T07:00:31.53Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-12-18T07:00:31.53Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 382,
+      "name": "RDL-Canary1",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T08:13:13.8333333Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T08:13:13.8333333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 383,
+      "name": "RDL-Canary2",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T08:32:37.11Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T08:32:37.11Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 389,
+      "name": "RDL-CUSTOM",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T09:48:18.39Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T09:48:18.39Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 193,
+      "name": "RDL-Daily",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T19:04:59.39Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T19:04:59.39Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 194,
+      "name": "RDL-DXT",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T19:14:09.44Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T19:14:09.44Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 171,
+      "name": "RDL-EDOG",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-06-26T20:24:13.08Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-06-26T20:24:13.08Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 386,
+      "name": "RDL-FF",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T09:16:04.8433333Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T09:16:04.8433333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 385,
+      "name": "RDL-MC",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T08:59:41.47Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T08:59:41.47Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 195,
+      "name": "RDL-MSIT",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T19:19:59.38Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T19:19:59.38Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 384,
+      "name": "RDL-PROD",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T08:42:51.3566667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T08:42:51.3566667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 388,
+      "name": "RDL-USN",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T09:31:07.11Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T09:31:07.11Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 387,
+      "name": "RDL-USS",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2025-01-29T09:23:45.4433333Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2025-01-29T09:23:45.4433333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 250,
+      "name": "SRC-Daily-PME",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-25T07:15:08.1166667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-25T07:15:08.1166667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 249,
+      "name": "SRC-DXTMSITPROD",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-25T06:35:14.0766667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-25T06:35:14.0766667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 247,
+      "name": "SRC-INT",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-24T18:26:58.68Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-24T18:26:58.68Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 222,
+      "name": "SRC-Prod",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-08-14T08:02:51.2133333Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-08-14T08:02:51.2133333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 198,
+      "name": "TEST-VRAVADI",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T23:44:22.1266667Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T23:44:22.1266667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 447,
+      "name": "TMDL Environment",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Suraiya Begum K (MAQ LLC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/2c33cee6-d255-6a98-9eb0-f20157faa96e; _links=; id=2c33cee6-d255-6a98-9eb0-f20157faa96e; uniqueName=v-sbegumk@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl; descriptor=aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl}",
+      "createdOn": "2025-06-20T12:51:16.82Z",
+      "lastModifiedBy": "@{displayName=Suraiya Begum K (MAQ LLC); url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/2c33cee6-d255-6a98-9eb0-f20157faa96e; _links=; id=2c33cee6-d255-6a98-9eb0-f20157faa96e; uniqueName=v-sbegumk@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl; descriptor=aad.MmMzM2NlZTYtZDI1NS03YTk4LTllYjAtZjIwMTU3ZmFhOTZl}",
+      "lastModifiedOn": "2025-06-20T12:51:16.82Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 251,
+      "name": "VIZ-Custom",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-25T10:46:35.15Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-25T10:46:35.15Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 252,
+      "name": "VIZ-Custom-Test",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-25T11:30:41.8333333Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-25T11:30:41.8333333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 196,
+      "name": "VIZ-Daily",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-07-07T19:52:45.13Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-07-07T19:52:45.13Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 173,
+      "name": "VIZ-EDOG",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "createdOn": "2024-06-27T05:31:32.64Z",
+      "lastModifiedBy": "@{displayName=Veeresh Ravadi; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/b5947056-7b36-4950-bc88-fce7486c8c9a; _links=; id=b5947056-7b36-4950-bc88-fce7486c8c9a; uniqueName=vravadi@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0; descriptor=aad.YjA3ZDY4MGMtZDZhOC03NTEyLWEzZjItYTUwMTBkNDc5M2I0}",
+      "lastModifiedOn": "2024-06-27T05:31:32.64Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 281,
+      "name": "VIZ-FF",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-09-28T18:38:10.2966667Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-09-28T18:38:10.2966667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 491,
+      "name": "VIZ-FFC",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Trevor Bruecher; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/2eee6678-cf9c-6460-878e-bf0c3ff216f9; _links=; id=2eee6678-cf9c-6460-878e-bf0c3ff216f9; uniqueName=tbruecher@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.MmVlZTY2NzgtY2Y5Yy03NDYwLTg3OGUtYmYwYzNmZjIxNmY5; descriptor=aad.MmVlZTY2NzgtY2Y5Yy03NDYwLTg3OGUtYmYwYzNmZjIxNmY5}",
+      "createdOn": "2025-10-27T16:03:28.1633333Z",
+      "lastModifiedBy": "@{displayName=Trevor Bruecher; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/2eee6678-cf9c-6460-878e-bf0c3ff216f9; _links=; id=2eee6678-cf9c-6460-878e-bf0c3ff216f9; uniqueName=tbruecher@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.MmVlZTY2NzgtY2Y5Yy03NDYwLTg3OGUtYmYwYzNmZjIxNmY5; descriptor=aad.MmVlZTY2NzgtY2Y5Yy03NDYwLTg3OGUtYmYwYzNmZjIxNmY5}",
+      "lastModifiedOn": "2025-10-27T16:03:28.1633333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 293,
+      "name": "VIZ-MC",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "createdOn": "2024-10-21T16:11:41.8833333Z",
+      "lastModifiedBy": "@{displayName=Himanshu Singh; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/63e105b0-5e32-6313-acd6-1646fa02f9f1; _links=; id=63e105b0-5e32-6313-acd6-1646fa02f9f1; uniqueName=himansingh@microsoft.com; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx; descriptor=aad.NjNlMTA1YjAtNWUzMi03MzEzLWFjZDYtMTY0NmZhMDJmOWYx}",
+      "lastModifiedOn": "2024-10-21T16:11:41.8833333Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    },
+    {
+      "id": 424,
+      "name": "VIZ-PF",
+      "description": "Automatically created environment",
+      "createdBy": "@{displayName=MerlinBot; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/56b0f042-b05e-86d9-b0f7-c5ddb1e76385; _links=; id=56b0f042-b05e-86d9-b0f7-c5ddb1e76385; uniqueName=Application\\56b0f042-b05e-86d9-b0f7-c5ddb1e76385; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/svc.NmQ4ZDZlNWMtN2RiZC00ZjQyLWE5NjMtYjVkNjk3YWE3ZTM5OkFwcGxpY2F0aW9uOjU2YjBmMDQyLWIwNWUtODZkOS1iMGY3LWM1ZGRiMWU3NjM4NQ; descriptor=svc.NmQ4ZDZlNWMtN2RiZC00ZjQyLWE5NjMtYjVkNjk3YWE3ZTM5OkFwcGxpY2F0aW9uOjU2YjBmMDQyLWIwNWUtODZkOS1iMGY3LWM1ZGRiMWU3NjM4NQ}",
+      "createdOn": "2025-05-06T19:34:43.3966667Z",
+      "lastModifiedBy": "@{displayName=MerlinBot; url=https://spsprodwus22.vssps.visualstudio.com/Aed475c3a-5c55-4fbf-a299-a513bd460399/_apis/Identities/56b0f042-b05e-86d9-b0f7-c5ddb1e76385; _links=; id=56b0f042-b05e-86d9-b0f7-c5ddb1e76385; uniqueName=Application\\56b0f042-b05e-86d9-b0f7-c5ddb1e76385; imageUrl=https://dev.azure.com/powerbi/_apis/GraphProfile/MemberAvatars/svc.NmQ4ZDZlNWMtN2RiZC00ZjQyLWE5NjMtYjVkNjk3YWE3ZTM5OkFwcGxpY2F0aW9uOjU2YjBmMDQyLWIwNWUtODZkOS1iMGY3LWM1ZGRiMWU3NjM4NQ; descriptor=svc.NmQ4ZDZlNWMtN2RiZC00ZjQyLWE5NjMtYjVkNjk3YWE3ZTM5OkFwcGxpY2F0aW9uOjU2YjBmMDQyLWIwNWUtODZkOS1iMGY3LWM1ZGRiMWU3NjM4NQ}",
+      "lastModifiedOn": "2025-05-06T19:34:43.3966667Z",
+      "project": "@{id=a7b12953-6e3b-4d8f-af39-20332f892c65; name=}"
+    }
+  ]
+}

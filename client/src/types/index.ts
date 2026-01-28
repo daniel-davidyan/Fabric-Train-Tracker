@@ -18,6 +18,7 @@ export const FE_ENVIRONMENTS: EnvironmentConfig[] = [
   { id: 192, name: 'MSIT', displayName: 'MSIT', order: 4 },
   { id: 310, name: 'Canary1', displayName: 'Canary1', order: 5 },
   { id: 300, name: 'Canary2', displayName: 'Canary2', order: 6 },
+  { id: 231, name: 'PROD', displayName: 'PROD', order: 7 },  // PLG-PROD-AMERICA (has deployment records)
 ];
 
 // Parsed PR URL

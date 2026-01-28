@@ -176,11 +176,6 @@ function App() {
                   </div>
                   <div className="env-info">
                     <div className="env-name">{env.displayName}</div>
-                    <div className="env-date">
-                      {hasData && envData.status === 'not-included' && envData.expectedDate && (
-                        <span className="env-expected">ETA: {new Date(envData.expectedDate).toLocaleDateString()}</span>
-                      )}
-                    </div>
                   </div>
                 </div>
               );
