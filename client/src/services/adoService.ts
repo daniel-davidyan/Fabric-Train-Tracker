@@ -466,10 +466,13 @@ export class ADOService {
             
             return null; // Ignore failed/other states if no success/progress
           })
-          .filter(r => r !== null) // Remove nulls
-          .Deep scan to handle mixed repo deployments (skip cross-repo) and 404s (Releases vs Builds)
+          .filter(r => r !== null); // Remove nulls
+
+        // Deep scan to handle mixed repo deployments (skip cross-repo) and 404s (Releases vs Builds)
         const maxChecks = 10;
         let successfulChecks = 0;
+        let confirmedDeployment = null;
+        let deploymentStatus: DeploymentStatus['status'] = 'deployed';
         
         console.log(`    📋 Scanning deployment history for ${env.displayName} (checking up to ${maxChecks} candidates from ${validDeployments.length} records)...`);
         
@@ -560,26 +563,7 @@ export class ADOService {
             }
             // Update URL to point to the actual build/release
             if (confirmedDeployment.owner?._links?.web) {
-               confirmedDeployment.owner._links.web.href = webUrl || confirmedDeployment.owner._links.web.hrefk (Strict)
-            isMatch = await this.isCommitAncestor(mergeCommitId, build.sourceVersion);
-          } else {
-            // RDL/VIZ: Cross-Repo Time-Based Heuristic
-            const buildStartTime = new Date(build.startTime);
-            const prMergeTime = new Date(closedDate);
-            isMatch = buildStartTime > prMergeTime;
-          }
-
-          if (isMatch) {
-            console.log(`    ✅ Match found in build ${buildId}`);
-            confirmedDeployment = deployment;
-            
-            // Determine status based on deployment result
-            if (!deployment.result && deployment.startTime && !deployment.finishTime) {
-               deploymentStatus = 'inProgress';
-            } else if (deployment.result?.toLowerCase() === 'succeeded') {
-               deploymentStatus = 'deployed';
-            } else {
-               deploymentStatus = 'unknown';
+               confirmedDeployment.owner._links.web.href = webUrl || confirmedDeployment.owner._links.web.href;
             }
             break;
           }
