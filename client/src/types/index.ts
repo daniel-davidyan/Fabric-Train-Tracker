@@ -130,7 +130,8 @@ export interface ServiceEnvironment {
   adoEnvId: number;
   adoEnvName: string;
   deploymentType: 'continuous' | 'train-based';  // EDOG is continuous, all others are train-based
-  product: 'PLG' | 'RDL' | 'VIZ'; // Added to distinguish logic
+  product: 'PLG' | 'RDL' | 'VIZ' | 'FE' | 'BE'; 
+  project?: string; // Optional project override (e.g., 'Power BI' or 'PowerBIClients')
 }
 
 export type PLGEnvironment = ServiceEnvironment; // Alias for backward compatibility
@@ -143,16 +144,30 @@ export interface TrainInfo {
   currentEnvironment?: string;  // Where the train currently is
 }
 
-// PLG Environments
-export const PLG_ENVIRONMENTS: ServiceEnvironment[] = [
-  { id: 'plg-edog', name: 'EDOG', displayName: 'PLG EDOG', order: 1, type: 'pre-prod', adoEnvId: 172, adoEnvName: 'PLG-EDOG', deploymentType: 'continuous', product: 'PLG' },
-  { id: 'plg-daily', name: 'Daily', displayName: 'PLG Daily', order: 2, type: 'pre-prod', adoEnvId: 190, adoEnvName: 'PLG-Daily', deploymentType: 'train-based', product: 'PLG' },
-  { id: 'plg-dxt', name: 'DXT', displayName: 'PLG DXT', order: 3, type: 'pre-prod', adoEnvId: 191, adoEnvName: 'PLG-DXT', deploymentType: 'train-based', product: 'PLG' },
-  { id: 'plg-msit', name: 'MSIT', displayName: 'PLG MSIT', order: 4, type: 'pre-prod', adoEnvId: 192, adoEnvName: 'PLG-MSIT', deploymentType: 'train-based', product: 'PLG' },
-  { id: 'plg-canary1', name: 'Canary1', displayName: 'PLG Canary 1', order: 5, type: 'prod', adoEnvId: 310, adoEnvName: 'PLG-PROD-Canary1', deploymentType: 'train-based', product: 'PLG' },
-  { id: 'plg-canary2', name: 'Canary2', displayName: 'PLG Canary 2', order: 6, type: 'prod', adoEnvId: 300, adoEnvName: 'PLG-PROD-Canary2', deploymentType: 'train-based', product: 'PLG' },
-  { id: 'plg-prod', name: 'PROD', displayName: 'PLG PROD', order: 7, type: 'prod', adoEnvId: 223, adoEnvName: 'PLG-PROD', deploymentType: 'train-based', product: 'PLG' },
+// FE Environments (PowerBIClients Project)
+export const FE_ENVIRONMENTS: ServiceEnvironment[] = [
+  { id: 'fe-edog', name: 'EDOG', displayName: 'FE EDOG', order: 1, type: 'pre-prod', adoEnvId: 172, adoEnvName: 'PLG-EDOG', deploymentType: 'continuous', product: 'FE', project: 'PowerBIClients' },
+  { id: 'fe-daily', name: 'Daily', displayName: 'FE Daily', order: 2, type: 'pre-prod', adoEnvId: 190, adoEnvName: 'PLG-Daily', deploymentType: 'train-based', product: 'FE', project: 'PowerBIClients' },
+  { id: 'fe-dxt', name: 'DXT', displayName: 'FE DXT', order: 3, type: 'pre-prod', adoEnvId: 191, adoEnvName: 'PLG-DXT', deploymentType: 'train-based', product: 'FE', project: 'PowerBIClients' },
+  { id: 'fe-msit', name: 'MSIT', displayName: 'FE MSIT', order: 4, type: 'pre-prod', adoEnvId: 192, adoEnvName: 'PLG-MSIT', deploymentType: 'train-based', product: 'FE', project: 'PowerBIClients' },
+  { id: 'fe-canary1', name: 'Canary1', displayName: 'FE Canary 1', order: 5, type: 'prod', adoEnvId: 310, adoEnvName: 'PLG-PROD-Canary1', deploymentType: 'train-based', product: 'FE', project: 'PowerBIClients' },
+  { id: 'fe-canary2', name: 'Canary2', displayName: 'FE Canary 2', order: 6, type: 'prod', adoEnvId: 300, adoEnvName: 'PLG-PROD-Canary2', deploymentType: 'train-based', product: 'FE', project: 'PowerBIClients' },
+  { id: 'fe-prod', name: 'PROD', displayName: 'FE PROD', order: 7, type: 'prod', adoEnvId: 223, adoEnvName: 'PLG-PROD', deploymentType: 'train-based', product: 'FE', project: 'PowerBIClients' },
 ];
+
+// BE Environments (Power BI Project - FMv2 + Shared Canaries)
+export const BE_ENVIRONMENTS: ServiceEnvironment[] = [
+  { id: 'be-edog', name: 'EDOG', displayName: 'BE EDOG', order: 1, type: 'pre-prod', adoEnvId: 175, adoEnvName: 'FMv2-EDOG', deploymentType: 'continuous', product: 'BE', project: 'Power BI' },
+  { id: 'be-daily', name: 'Daily', displayName: 'BE Daily', order: 2, type: 'pre-prod', adoEnvId: 183, adoEnvName: 'FMv2-DAILY', deploymentType: 'train-based', product: 'BE', project: 'Power BI' },
+  { id: 'be-dxt', name: 'DXT', displayName: 'BE DXT', order: 3, type: 'pre-prod', adoEnvId: 184, adoEnvName: 'FMv2-DXT', deploymentType: 'train-based', product: 'BE', project: 'Power BI' },
+  { id: 'be-msit', name: 'MSIT', displayName: 'BE MSIT', order: 4, type: 'pre-prod', adoEnvId: 185, adoEnvName: 'FMv2-MSIT', deploymentType: 'train-based', product: 'BE', project: 'Power BI' },
+  // Using EXP-CANARY for Backend as FMv2-Canary isn't explicit
+  { id: 'be-canary1', name: 'Canary1', displayName: 'BE Canary 1', order: 5, type: 'prod', adoEnvId: 268, adoEnvName: 'EXP-CANARY1', deploymentType: 'train-based', product: 'BE', project: 'Power BI' },
+  { id: 'be-canary2', name: 'Canary2', displayName: 'BE Canary 2', order: 6, type: 'prod', adoEnvId: 269, adoEnvName: 'EXP-CANARY2', deploymentType: 'train-based', product: 'BE', project: 'Power BI' },
+  { id: 'be-prod', name: 'PROD', displayName: 'BE PROD', order: 7, type: 'prod', adoEnvId: 309, adoEnvName: 'FMv2-PROD', deploymentType: 'train-based', product: 'BE', project: 'Power BI' },
+];
+
+export const PLG_ENVIRONMENTS: ServiceEnvironment[] = FE_ENVIRONMENTS; // Default stub
 
 export const RDL_ENVIRONMENTS: ServiceEnvironment[] = [
   { id: 'rdl-edog', name: 'EDOG', displayName: 'RDL EDOG', order: 1, type: 'pre-prod', adoEnvId: 171, adoEnvName: 'RDL-EDOG', deploymentType: 'continuous', product: 'RDL' },
@@ -173,9 +188,10 @@ export const VIZ_ENVIRONMENTS: ServiceEnvironment[] = [
 ];
 
 export const ALL_TRACKED_ENVIRONMENTS = [
-  ...PLG_ENVIRONMENTS,
-  ...RDL_ENVIRONMENTS,
-  ...VIZ_ENVIRONMENTS
+  ...FE_ENVIRONMENTS,
+  ...BE_ENVIRONMENTS,
+  ...VIZ_ENVIRONMENTS,
+  ...RDL_ENVIRONMENTS
 ];
 
 

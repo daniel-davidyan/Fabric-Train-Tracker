@@ -267,14 +267,20 @@ export class ADOService {
     }
   }
 
-  async getEnvironmentDeploymentRecords(environmentId: number, top: number = 50): Promise<ADOEnvironmentDeploymentRecord[]> {
-    const url = `${this.baseUrl}/_apis/distributedtask/environments/${environmentId}/environmentdeploymentrecords?top=${top}&api-version=${API_VERSION_PREVIEW}`;
+  async getEnvironmentDeploymentRecords(environmentId: number, top: number = 50, projectName?: string): Promise<ADOEnvironmentDeploymentRecord[]> {
+    // Construct base URL based on project override or default parsed project
+    let baseUrl = this.baseUrl;
+    if (projectName) {
+      baseUrl = `https://dev.azure.com/${this.parsedUrl.organization}/${encodeURIComponent(projectName)}`;
+    }
+
+    const url = `${baseUrl}/_apis/distributedtask/environments/${environmentId}/environmentdeploymentrecords?top=${top}&api-version=${API_VERSION_PREVIEW}`;
     
     try {
       const response = await this.fetchAdo<ADOEnvironmentDeploymentRecordsResponse>(url);
       return response.value || [];
     } catch (error) {
-      console.warn(`Could not fetch deployment records for environment ${environmentId}:`, error);
+      console.warn(`Could not fetch deployment records for environment ${environmentId} (Project: ${projectName || 'default'}):`, error);
       return [];
     }
   }
@@ -448,13 +454,36 @@ export class ADOService {
 
     const deployments: DeploymentStatus[] = [];
 
+    // Detect if this is a FE (PowerBIClients) or BE (Power BI) PR
+    const isFE = this.parsedUrl.repository.toLowerCase() === POWERBI_CLIENTS_REPO_NAME.toLowerCase();
+    const isBE = this.parsedUrl.repository.toLowerCase() === 'power bi' || 
+                 this.parsedUrl.repository.toLowerCase() === 'powerbi' ||
+                 this.parsedUrl.repository.toLowerCase() === 'power%20bi';
+
+    console.log(`  Repo Logic: ${this.parsedUrl.repository} -> FE? ${isFE}, BE? ${isBE}`);
+
+    // Filter relevant environments
+    let relevantEnvs = ALL_TRACKED_ENVIRONMENTS;
+    if (isFE) {
+        relevantEnvs = ALL_TRACKED_ENVIRONMENTS.filter(e => e.product === 'FE');
+    } else if (isBE) {
+        relevantEnvs = ALL_TRACKED_ENVIRONMENTS.filter(e => e.product === 'BE');
+    } else {
+        // Default / Fallback: Try PLG/RDL/VIZ as before or just all?
+        // Let's stick to old behavior if not clearly FE/BE, or default to BE (Monolith) if unknown
+        console.log('  ⚠️ Unrecognized repo for PLG logic. Checking standard PLG/RDL sets.');
+    }
+
+    console.log(`  Checking ${relevantEnvs.length} environments...`);
+
     // Check each environment INDEPENDENTLY
     // Each ring has its own pipeline and may deploy from different branches
-    for (const env of ALL_TRACKED_ENVIRONMENTS) {
+    for (const env of relevantEnvs) {
       try {
-        console.log(`\n  📍 ${env.displayName} (envId: ${env.adoEnvId}) [${env.product || 'PLG'}]...`);
+        console.log(`\n  📍 ${env.displayName} (envId: ${env.adoEnvId}) [${env.product}]...`);
         
-        const records = await this.getEnvironmentDeploymentRecords(env.adoEnvId, 30);
+        // Pass project override if defined (crucial for Cross-Project checks)
+        const records = await this.getEnvironmentDeploymentRecords(env.adoEnvId, 30, env.project);
         
         // Get successful deployments, newest first
         // Check deployments to find one that contains the PR

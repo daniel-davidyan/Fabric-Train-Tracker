@@ -22,7 +22,7 @@ function DeploymentTable({ deployments }: DeploymentTableProps) {
     return Math.round((succeeded / productEnvs.length) * 100)
   }
 
-  const products = ['PLG', 'RDL', 'VIZ'] as const;
+  const products = ['FE', 'BE', 'PLG', 'RDL', 'VIZ'] as const;
 
   return (
     <div className="bg-slate-800 rounded-lg p-6 border border-slate-700 space-y-8">
