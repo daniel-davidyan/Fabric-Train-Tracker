@@ -87,7 +87,21 @@ function App() {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="pat">PAT Token</label>
+            <label htmlFor="pat">
+              PAT Token
+              <a 
+                href="https://dev.azure.com/powerbi/_usersSettings/tokens" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="pat-help-link"
+                title="Create a new PAT token"
+              >
+                Create PAT →
+              </a>
+            </label>
+            <p className="pat-hint">
+              Required scopes: <strong>Code</strong> (Read), <strong>Build</strong> (Read), <strong>Environment</strong> (Read & manage)
+            </p>
             <input
               id="pat"
               type="password"
