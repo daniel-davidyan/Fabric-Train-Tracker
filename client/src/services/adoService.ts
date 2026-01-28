@@ -110,12 +110,14 @@ export async function checkPRDeploymentStatus(prUrl: string, pat: string): Promi
   const mergeDate = prInfo.closedDate ? new Date(prInfo.closedDate) : new Date();
   const expectedDates = calculateExpectedDates(mergeDate);
 
-  const environments: EnvironmentDeploymentStatus[] = [];
-  for (const env of FE_ENVIRONMENTS) {
-    const status = await checkEnvironmentStatus(parsed.organization, env.id, prInfo.mergeCommitId, headers);
+  // Check ALL environments in PARALLEL for speed (6 concurrent requests)
+  const environmentPromises = FE_ENVIRONMENTS.map(async (env) => {
+    const status = await checkEnvironmentStatus(parsed.organization, env.id, prInfo.mergeCommitId!, headers);
     const expectedDate = expectedDates[env.name.toLowerCase()] || undefined;
-    environments.push({ environment: env, ...status, expectedDate });
-  }
+    return { environment: env, ...status, expectedDate };
+  });
+
+  const environments = await Promise.all(environmentPromises);
 
   return { prInfo, environments, supportedRepo: true };
 }
@@ -195,7 +197,7 @@ async function checkEnvironmentStatus(
   headers: Record<string, string>
 ): Promise<{ status: EnvironmentDeploymentStatus['status']; buildId?: number; buildNumber?: string; buildTimestamp?: string; buildUrl?: string; }> {
   try {
-    const recordsUrl = 'https://dev.azure.com/' + organization + '/' + POWERBI_CLIENTS_PROJECT + '/_apis/distributedtask/environments/' + environmentId + '/environmentdeploymentrecords?top=30&api-version=7.1-preview.1';
+    const recordsUrl = 'https://dev.azure.com/' + organization + '/' + POWERBI_CLIENTS_PROJECT + '/_apis/distributedtask/environments/' + environmentId + '/environmentdeploymentrecords?top=10&api-version=7.1-preview.1';
     const recordsResponse = await fetch(recordsUrl, { headers });
     if (!recordsResponse.ok) return { status: 'error' };
 
@@ -203,6 +205,7 @@ async function checkEnvironmentStatus(
     const records: ADOEnvironmentDeploymentRecord[] = recordsData.value || [];
     if (records.length === 0) return { status: 'no-builds' };
 
+    // Collect unique succeeded build IDs
     const buildMap = new Map<number, ADOEnvironmentDeploymentRecord>();
     for (const record of records) {
       if (record.owner?.id && record.result?.toLowerCase() === 'succeeded') {
@@ -211,21 +214,38 @@ async function checkEnvironmentStatus(
     }
 
     const inProgressRecord = records.find(r => !r.finishTime);
+    const buildEntries = Array.from(buildMap.entries());
+    
+    if (buildEntries.length === 0) {
+      return inProgressRecord ? { status: 'in-progress' } : { status: 'not-included' };
+    }
 
-    for (const [buildId, record] of buildMap) {
+    // Fetch ALL builds in PARALLEL
+    const buildPromises = buildEntries.map(async ([buildId, record]) => {
       const build = await fetchBuild(organization, buildId, headers);
-      if (!build?.sourceVersion) continue;
+      return { build, record };
+    });
+    const buildResults = await Promise.all(buildPromises);
 
-      const isAncestor = await isPRIncludedInBuild(organization, prMergeCommit, build.sourceVersion, headers);
-      if (isAncestor) {
-        return {
-          status: 'included',
-          buildId: build.id,
-          buildNumber: build.buildNumber,
-          buildTimestamp: record.finishTime || record.startTime,
-          buildUrl: build._links?.web?.href,
-        };
-      }
+    // Check merge bases for ALL builds in PARALLEL
+    const ancestorPromises = buildResults
+      .filter(({ build }) => build?.sourceVersion)
+      .map(async ({ build, record }) => {
+        const isAncestor = await isPRIncludedInBuild(organization, prMergeCommit, build!.sourceVersion, headers);
+        return { build: build!, record, isAncestor };
+      });
+    const ancestorResults = await Promise.all(ancestorPromises);
+
+    // Find first included build (earliest successful deployment)
+    const includedResult = ancestorResults.find(r => r.isAncestor);
+    if (includedResult) {
+      return {
+        status: 'included',
+        buildId: includedResult.build.id,
+        buildNumber: includedResult.build.buildNumber,
+        buildTimestamp: includedResult.record.finishTime || includedResult.record.startTime,
+        buildUrl: includedResult.build._links?.web?.href,
+      };
     }
 
     if (inProgressRecord) return { status: 'in-progress' };
